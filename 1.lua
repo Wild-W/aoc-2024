@@ -1,0 +1,1 @@
+local file = io.open("1.txt", "r")
