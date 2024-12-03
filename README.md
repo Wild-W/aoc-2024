@@ -1,5 +1,15 @@
 # Advent of Code 2024
 
+## How to run:
+
+Create a `.txt` file named the number of the day, and paste the input into that file. Then compile and run the code for that day.
+
+For example:
+
+* Filename: `3.txt`
+* Content: `xmul(2,4)&mul[3,7]!^don't()_mul(5,5)+mul(32,64](mul(11,8)undo()?mul(8,5))`
+* Cmd: `deno run --allow-read=. 3p2.js`
+
 ## Day 1
 
 * Language: Lua
