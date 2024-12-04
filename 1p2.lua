@@ -1,5 +1,3 @@
-local inspect = require "lib.inspect"
-
 local file = io.open("1.txt", "r")
 if file == nil then error("Input file was not found") end
 

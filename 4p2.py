@@ -8,5 +8,4 @@ for i in range(len(rows) - 2):
             elif rows[i][j] == "S" and rows[i+2][j+2] == "M" \
                 and ((rows[i+2][j] == "M" and rows[i][j+2] == "S") or (rows[i+2][j] == "S" and rows[i][j+2] == "M")): sum += 1
 
-
 print(sum)
