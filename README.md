@@ -31,3 +31,8 @@ I've listed the runtimes and compilers that I used when developing each solution
 
 * Language: Python
 * Runtime: CPython
+
+## Day 5
+
+* Language: C#
+* Runtime: dotnet-script on .NET 9.0
