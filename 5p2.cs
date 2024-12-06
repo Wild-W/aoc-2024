@@ -52,7 +52,6 @@ static List<int> TopologicalSort(List<int> sequence, Dictionary<int, HashSet<int
 
 StreamReader reader = new("5.txt");
 Dictionary<int, HashSet<int>> dependenciesMap = new();
-Dictionary<int, HashSet<int>> rulesMap = new();
 long score = 0;
 
 string line;
@@ -62,18 +61,12 @@ while ((line = reader.ReadLine()) != "")   // {page number}|{page number}
     int p1 = int.Parse(matchedPageNumbers[0].Value);
     int p2 = int.Parse(matchedPageNumbers[1].Value);
 
-    if (!dependenciesMap.TryGetValue(p2, out var set1))
+    if (!dependenciesMap.TryGetValue(p2, out var set))
     {
-        set1 = new HashSet<int>();
-        dependenciesMap[p2] = set1;
+        set = new HashSet<int>();
+        dependenciesMap[p2] = set;
     }
-    if (!rulesMap.TryGetValue(p1, out var set2))
-    {
-        set2 = new HashSet<int>();
-        rulesMap[p1] = set2;
-    }
-    set1.Add(p1);
-    set2.Add(p2);
+    set.Add(p1);
 }
 while ((line = reader.ReadLine()) != null) // {page number},{page number},...
 {
@@ -81,12 +74,12 @@ while ((line = reader.ReadLine()) != null) // {page number},{page number},...
     bool needsSorting = false;
     List<int> pageNumbers = Regex.Matches(line, @"\d+").Select(m => {
         int p = int.Parse(m.Value);
-        if (rulesMap.TryGetValue(p, out var set))
+        
+        if (previousPageNumbers.Any(prior => dependenciesMap.TryGetValue(prior, out var deps) && deps.Contains(p)))
         {
-            HashSet<int> violations = new HashSet<int>(previousPageNumbers);
-            violations.IntersectWith(set);
-            if (violations.Count != 0) needsSorting = true;
+            needsSorting = true;
         }
+
         previousPageNumbers.Add(p);
         return p;
         }).ToList();
